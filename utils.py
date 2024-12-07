@@ -29,26 +29,30 @@ def entrar_quantidade ():
         except:
             print("Entrada inválida")
 
-def entrar_id ():
-    return int(input("Digite o id do produto: "))
+def entrar_id (produtos):
+    while True:
+        id = int(input("Digite o id do produto: "))
+        if pesquisar_id(produtos, id):
+            return id
     
 def pesquisar_id (produtos, id):
     '''
     faz a busca pelo id do produto dentro da lista de produtos, caso encontre retorna o id se não retorna -1
     '''
-    imprimir_produtos(produtos)
     for produto in produtos:
         if (produto[0] == id):
             return True
     print("ID não localizado")
     return False
 
-def verificar_estoque(produtos, id):
-    for produto in produtos:
-        if (produto[0] == id and (int(produto[2]) > 0)):
-            return True
-        else:
-            return False
+def verificar_estoque(produto, quantidade):
+    '''
+    Recebe o produto e quantidade informada e verificar se o estoque e suficiente
+    '''
+    if int(produto[2]) >= int(quantidade):
+        return True
+    else:
+        return False
             
 def remover_produto_estoque (produtos, id, quantidade):
     for produto in produtos:
@@ -56,8 +60,7 @@ def remover_produto_estoque (produtos, id, quantidade):
             produto[2] -= quantidade
     return produtos
     
-
-# remover depois
 def imprimir_produtos (produtos):
     for produto in produtos:
-        print(f"[ {produto} ]")
+        print(f"{produto}")
+

@@ -1,36 +1,32 @@
 from utils import *
 
-def adicionar_produtos (produtos):
-    '''
-    Adiciona os produtos a lista do cliente, remover o produto adicionado ao cliente do estoque e 
-    retorna a lista de produtos e a lista do cliente atualizadas
-    '''
-    # imprimir_produtos(produtos)
-    cliente = []
+def controle_caixa (produtos):
+
+    itens_cliente = []
     flag = msg_iniciar_atendimento()
     while flag:
-        id_produto = entrar_id()
-        produto_valido = pesquisar_id(produtos, id_produto)
-        if produto_valido:
-            if verificar_estoque(produtos, id_produto):
-                quantidade = entrar_quantidade()
-                produto = produtos[id_produto]
-                cliente.append({"produto": produto, "quantidade": quantidade})
-                produtos = remover_produto_estoque(produtos, id_produto, quantidade)
-            else:
-                print(f"Produto [{produtos[id_produto][1]}] sem estoque.")
-        else:
-            print("Produto não encontrado.")
+        imprimir_produtos(produtos)
+        id_produto = entrar_id(produtos)
+        produtos, itens_cliente = adicionar_produto(produtos, id_produto, itens_cliente)
         flag = msg_finalizar_atendimento()
-    return produtos, cliente
+    return produtos, itens_cliente
 
-def caixa (produtos):
-    '''
-    Controla o sistema do caixa
-    '''
+def adicionar_produto(produtos, id_produto, itens_cliente):
+    for produto in produtos:
+        if produto[0] == id_produto:
+            print(f"{produto[1]} está sendo adicionado.")
+            quantidade = entrar_quantidade()
+            if verificar_estoque(produto, quantidade):
+                produtos = remover_produto_estoque(produtos, id_produto, quantidade)
+                itens_cliente.append((produto[1], quantidade))
+                print(f"{produto[1]} foi adicionado.")
+            else:
+                print("Estoque insuficiente.")
+    return produtos, itens_cliente
+
+def caixa(produtos):
     clientes = []
-    produtos, cliente = adicionar_produtos(produtos)
-    print(cliente)
-    # imprimir_produtos(produtos)
+    produtos, itens_cliente = controle_caixa(produtos)
+    clientes.append(itens_cliente)
     
     
