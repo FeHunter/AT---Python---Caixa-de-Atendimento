@@ -1,0 +1,33 @@
+Código iniciado na IDE GDB: https://onlinegdb.com/yZz0aTx1F
+
+OBS: Utilizar somente lista
+
+** Produto.csv  |   id, nome, quantidade_estoque, preço
+1,Produto 1,1,10
+2,Produto 2,2,20
+3,Produto 3,3,30
+4,Produto 4,4,40
+5,Produto 5,5,50
+
+
+** Lista de itens
+Itens: id , nome_produto, quantidade_produto, preço_unitário, preço_total
+obs: preço_total = preço_unitário * quantidade_produto
+
+
+1°  Abrir o arquivo produtos.csv e armazena-lo em uma lista
+2°  Exibir mensagem "Iniciar atendimento" e "Finalizar atendimento"
+3°  Inserir o id do produto, que deve constar na lista (fazer validação da entrada do id)
+4°  Inserir a quantidade do produto (garantir que a entrada para quantidade de produtos comprados seja maior que zero)
+5°  Adicionar o produto na lista do cliente (cada cliente tem sua propria lista)
+6°  Ao comprar um produto, deve dar baixa no estoque diminuindo a quantidade
+7°  Ao finalizar o atendimento de um cliente, exibir 'nota fiscal' com as informações
+8°  Quando o caixar for fechado o programa deve exibir uma lista de clientes atendidos com o total da compra de cada cliente
+9°  Junto do 9° também deve ser informado o total de vendas
+10° Exibir uma lista de produtos que estão sem estoque (quantidade igual a zero)
+11° Gravar os dados atualizados dos produtos no arquivo produtos.csv
+
+
+Estrutura das listas:
+* Clientes -> cliente -> produtos
+* Produtos -> Produto
