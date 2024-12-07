@@ -1,5 +1,6 @@
 from arquivo import *
 from caixa import caixa
 
-produtos = produtos_mock()
-caixa(produtos)
+produtos = abrir_arquivo()
+if produtos != []:
+    caixa(produtos)

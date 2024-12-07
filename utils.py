@@ -39,25 +39,25 @@ def pesquisar_id (produtos, id):
     imprimir_produtos(produtos)
     for produto in produtos:
         if (produto[0] == id):
-            return id
+            return True
     print("ID não localizado")
-    return -1
+    return False
 
 def verificar_estoque(produtos, id):
     for produto in produtos:
-        if (produto[0] == id and produto[2] > 0):
+        if (produto[0] == id and (int(produto[2]) > 0)):
             return True
         else:
             return False
             
 def remover_produto_estoque (produtos, id, quantidade):
     for produto in produtos:
-        produto[2] -= quantidade
+        if produto[0] == id:
+            produto[2] -= quantidade
     return produtos
     
-    
-    
+
 # remover depois
 def imprimir_produtos (produtos):
     for produto in produtos:
-        print(f"[ produto ]")
+        print(f"[ {produto} ]")
