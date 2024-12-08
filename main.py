@@ -3,4 +3,5 @@ from caixa import caixa
 
 produtos = abrir_arquivo()
 if produtos != []:
-    caixa(produtos)
+    produtos = caixa(produtos)
+gravar_arquivo(produtos)

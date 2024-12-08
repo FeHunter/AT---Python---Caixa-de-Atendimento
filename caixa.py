@@ -37,6 +37,7 @@ def caixa(produtos):
             break
     mostrar_resumo_caixa(clientes)
     mostrar_produtos_sem_estoque(produtos)
+    return produtos
 
 def imprimir_nota_cliente(clientes, contador_clientes):
     cliente = clientes[contador_clientes]
@@ -72,3 +73,4 @@ def mostrar_produtos_sem_estoque(produtos):
     for produto in produtos:
         if int(produto[2]) <= 0:
             print(produto[1])
+

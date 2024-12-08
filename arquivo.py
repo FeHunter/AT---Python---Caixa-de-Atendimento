@@ -22,3 +22,17 @@ def abrir_arquivo ():
     
     return produtos
 
+def gravar_arquivo(produtos):
+    '''
+    Grava os dados dos produtos em um arquivo produtos.csv
+    '''
+    dir_current = pathlib.Path(__file__).parent.resolve()
+    arq = str(dir_current) + "//produtos.csv"
+    try:
+        with open(arq, "w", encoding="UTF-8") as arquivo:
+            for produto in produtos:
+                linha = f"{produto[0]},{produto[1]},{produto[2]},{produto[3]}\n"
+                arquivo.write(linha)
+    except:
+        print("Erro ao salvar arquivo.")
+
