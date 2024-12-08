@@ -10,6 +10,7 @@ def controle_caixa (produtos_disponiveis):
         id_produto = entrar_id(produtos)
         produtos, itens_cliente = adicionar_produto(produtos, id_produto, itens_cliente)
         flag = msg_finalizar_atendimento()
+    imprimir_nota_cliente (itens_cliente)
     return itens_cliente
 
 def adicionar_produto(produtos, id_produto, itens_cliente):
@@ -32,25 +33,20 @@ def caixa(produtos):
         clientes.append(itens_cliente)
         if msg_fechar_caixa():
             break
-    mostrar_caixa(clientes)
+    # mostrar_caixa(clientes)
 
-def mostrar_caixa(clientes):
-    ctd_cliente = 1
-    for cliente in clientes:
-        tabela = []
-        total_cliente = 0
-        for item in cliente:
-            id_item, nome, quantidade, preco = item
-            total = quantidade * preco
-            tabela.append([id_item, nome, quantidade, preco, total])
-            total_cliente += total
+def imprimir_nota_cliente(cliente):
+    tabela = []
+    total_cliente = 0
+    for item in cliente:
+        id_item, nome, quantidade, preco = item
+        total = quantidade * preco
+        tabela.append([id_item, nome, quantidade, preco, total])
+        total_cliente += total
 
-        msg_informacoes_cliente(ctd_cliente)
-        print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
-        print(f"Itens: {len(cliente)}")
-        print(f"Total: {total_cliente}")
-
-        ctd_cliente += 1
+    print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
+    print(f"Itens: {len(cliente)}")
+    print(f"Total: {total_cliente}")
 
     
     
