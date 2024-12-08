@@ -63,7 +63,7 @@ def pesquisar_id (produtos, id):
     for produto in produtos:
         if (produto[0] == id):
             return True
-    print("ID não localizado")
+    print("Produto não cadastrado")
     return False
 
 def verificar_estoque(produto, quantidade):
