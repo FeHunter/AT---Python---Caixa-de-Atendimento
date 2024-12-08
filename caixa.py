@@ -10,7 +10,7 @@ def controle_caixa(produtos_disponiveis):
         id_produto = entrar_id(produtos)
         produtos, itens_cliente = adicionar_produto(produtos, id_produto, itens_cliente)
         flag = msg_finalizar_atendimento()
-    return itens_cliente
+    return produtos, itens_cliente
 
 def adicionar_produto(produtos, id_produto, itens_cliente):
     for produto in produtos:
@@ -29,13 +29,14 @@ def caixa(produtos):
     clientes = []
     contador_clientes = 0
     while True:
-        itens_cliente = controle_caixa(produtos)
+        produtos, itens_cliente = controle_caixa(produtos)
         clientes.append(itens_cliente)
         imprimir_nota_cliente(clientes, contador_clientes)
         contador_clientes += 1
         if msg_fechar_caixa():
             break
     mostrar_resumo_caixa(clientes)
+    mostrar_produtos_sem_estoque(produtos)
 
 def imprimir_nota_cliente(clientes, contador_clientes):
     cliente = clientes[contador_clientes]
@@ -65,3 +66,9 @@ def mostrar_resumo_caixa(clientes):
     print("\nFechamento do Caixa:")
     print(tabulate(resumo, headers=["Cliente", "Total"], tablefmt="grid"))
     print(f"Total de vendas: {total_vendas}")
+
+def mostrar_produtos_sem_estoque(produtos):
+    print("\nProdutos sem estoque:")
+    for produto in produtos:
+        if int(produto[2]) <= 0:
+            print(produto[1])
