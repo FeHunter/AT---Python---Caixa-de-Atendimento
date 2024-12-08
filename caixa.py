@@ -1,7 +1,7 @@
 from tabulate import tabulate
 from utils import *
 
-def controle_caixa (produtos_disponiveis):
+def controle_caixa(produtos_disponiveis):
     produtos = produtos_disponiveis
     itens_cliente = []
     flag = msg_iniciar_atendimento()
@@ -31,28 +31,37 @@ def caixa(produtos):
     while True:
         itens_cliente = controle_caixa(produtos)
         clientes.append(itens_cliente)
-        imprimir_nota_cliente (clientes, contador_clientes)
+        imprimir_nota_cliente(clientes, contador_clientes)
         contador_clientes += 1
         if msg_fechar_caixa():
             break
-    # mostrar_caixa(clientes)
+    mostrar_resumo_caixa(clientes)
 
 def imprimir_nota_cliente(clientes, contador_clientes):
+    cliente = clientes[contador_clientes]
+    tabela = []
+    total_cliente = 0
+    for item in cliente:
+        id_item, nome, quantidade, preco = item
+        total = quantidade * preco
+        tabela.append([id_item, nome, quantidade, preco, total])
+        total_cliente += total
+
+    msg_informacoes_cliente(contador_clientes + 1)
+    print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
+    print(f"Itens: {len(cliente)}")
+    print(f"Total: {total_cliente}\n")
+
+def mostrar_resumo_caixa(clientes):
+    resumo = []
+    total_vendas = 0
+
     for i in range(0, len(clientes)):
-        if (i == contador_clientes):
-            cliente = clientes[contador_clientes]
-            tabela = []
-            total_cliente = 0
-            for item in cliente:
-                id_item, nome, quantidade, preco = item
-                total = quantidade * preco
-                tabela.append([id_item, nome, quantidade, preco, total])
-                total_cliente += total
+        cliente = clientes[i]
+        total_cliente = sum(item[2] * item[3] for item in cliente)
+        total_vendas += total_cliente
+        resumo.append([f"Cliente: {i+1}", total_cliente])
 
-            msg_informacoes_cliente(contador_clientes + 1)
-            print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
-            print(f"Itens: {len(cliente)}")
-            print(f"Total: {total_cliente}")
-
-    
-    
+    print("\nFechamento do Caixa:")
+    print(tabulate(resumo, headers=["Cliente", "Total"], tablefmt="grid"))
+    print(f"Total de vendas: {total_vendas}")
