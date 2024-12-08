@@ -1,7 +1,8 @@
 from tabulate import tabulate
 from utils import *
 
-def controle_caixa (produtos):
+def controle_caixa (produtos_disponiveis):
+    produtos = produtos_disponiveis
     itens_cliente = []
     flag = msg_iniciar_atendimento()
     while flag:
@@ -9,7 +10,7 @@ def controle_caixa (produtos):
         id_produto = entrar_id(produtos)
         produtos, itens_cliente = adicionar_produto(produtos, id_produto, itens_cliente)
         flag = msg_finalizar_atendimento()
-    return produtos, itens_cliente
+    return itens_cliente
 
 def adicionar_produto(produtos, id_produto, itens_cliente):
     for produto in produtos:
@@ -17,18 +18,23 @@ def adicionar_produto(produtos, id_produto, itens_cliente):
             print(f"{produto[1]} está sendo adicionado.")
             quantidade = entrar_quantidade(produto)
             produtos = remover_produto_estoque(produtos, id_produto, quantidade)
-            itens_cliente.append(produto)
+            # copia o produto e adiciona ao carrinho
+            add_produto = produto[:]
+            add_produto[2] = quantidade
+            itens_cliente.append(add_produto)
             print(f"{produto[1]} foi adicionado.")
     return produtos, itens_cliente
 
 def caixa(produtos):
     clientes = []
     while True:
-        produtos, itens_cliente = controle_caixa(produtos)
+        itens_cliente = controle_caixa(produtos)
         clientes.append(itens_cliente)
         if msg_fechar_caixa():
             break
+    mostrar_caixa(clientes)
 
+def mostrar_caixa(clientes):
     ctd_cliente = 1
     for cliente in clientes:
         tabela = []

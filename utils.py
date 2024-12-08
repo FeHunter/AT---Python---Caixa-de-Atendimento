@@ -2,7 +2,7 @@ from datetime import datetime
 
 def msg_iniciar_atendimento ():
     while True:
-        resposta = input("Iniciar atendimento? S|N : ")
+        resposta = input("\nIniciar atendimento? S|N : ")
         if (resposta.lower() == "s"):
             return True
         elif (resposta.lower() == "n"):
@@ -12,7 +12,7 @@ def msg_iniciar_atendimento ():
 
 def msg_finalizar_atendimento ():
     while True:
-        resposta = input("Finalizar atendimento? S|N : ")
+        resposta = input("\nFinalizar atendimento? S|N : ")
         if (resposta.lower() == "s"):
             return False
         elif (resposta.lower() == "n"):
@@ -21,7 +21,7 @@ def msg_finalizar_atendimento ():
             print("Entrada inválida")
 
 def msg_fechar_caixa():
-    fechar = input("Fechar o caxia? S/N: ")
+    fechar = input("\nFechar o caxia? S/N: ")
     if fechar.lower() == "s":
         return True
     elif fechar.lower() == "n":
@@ -87,11 +87,12 @@ def produto_pelo_id (produtos, id):
             return produto
 
 def imprimir_produtos (produtos):
+    print("\nProdutos Disponiveis:")
     for produto in produtos:
         print(f"{produto}")
 
 def msg_informacoes_cliente (client_id):
-    print(f"Cliente {client_id}")
+    print(f"\nCliente {client_id}")
     data_hora = datetime.now()
     data_hora_formatado = data_hora.strftime("%d/%m/%Y %H:%M")
     print(f"Data: {data_hora_formatado}")
