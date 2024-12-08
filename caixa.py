@@ -1,3 +1,4 @@
+from tabulate import tabulate
 from utils import *
 
 def controle_caixa (produtos):
@@ -16,13 +17,28 @@ def adicionar_produto(produtos, id_produto, itens_cliente):
             print(f"{produto[1]} está sendo adicionado.")
             quantidade = entrar_quantidade(produto)
             produtos = remover_produto_estoque(produtos, id_produto, quantidade)
-            itens_cliente.append((produto[1], quantidade))
+            itens_cliente.append(produto)
             print(f"{produto[1]} foi adicionado.")
     return produtos, itens_cliente
 
 def caixa(produtos):
     clientes = []
-    produtos, itens_cliente = controle_caixa(produtos)
-    clientes.append(itens_cliente)
+    while True:
+        produtos, itens_cliente = controle_caixa(produtos)
+        clientes.append(itens_cliente)
+        # end
+        fechar = input("Fechar o caxia? S/N: ")
+        if fechar.lower() == "s":
+            break
+
+    for cliente in clientes:
+        tabela = []
+        for item in cliente:
+            id_item, nome, quantidade, preco = item
+            total = quantidade * preco
+            tabela.append([id_item, nome, quantidade, preco, total])
+
+        print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
+
     
     
