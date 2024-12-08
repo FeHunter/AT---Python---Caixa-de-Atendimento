@@ -26,11 +26,10 @@ def caixa(produtos):
     while True:
         produtos, itens_cliente = controle_caixa(produtos)
         clientes.append(itens_cliente)
-        # end
-        fechar = input("Fechar o caxia? S/N: ")
-        if fechar.lower() == "s":
+        if msg_fechar_caixa():
             break
 
+    ctd_cliente = 1
     for cliente in clientes:
         tabela = []
         for item in cliente:
@@ -38,7 +37,9 @@ def caixa(produtos):
             total = quantidade * preco
             tabela.append([id_item, nome, quantidade, preco, total])
 
+        msg_informacoes_cliente(ctd_cliente)
         print(tabulate(tabela, headers=["Item", "Produto", "Quant.", "Preço", "Total"], tablefmt="grid"))
+        ctd_cliente += 1
 
     
     
