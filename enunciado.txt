@@ -15,10 +15,10 @@ Itens: id , nome_produto, quantidade_produto, preço_unitário, preço_total
 obs: preço_total = preço_unitário * quantidade_produto
 
 
-1°  Abrir o arquivo produtos.csv e armazena-lo em uma lista
-2°  Exibir mensagem "Iniciar atendimento" e "Finalizar atendimento"
-3°  Inserir o id do produto, que deve constar na lista (fazer validação da entrada do id)
-4°  Inserir a quantidade do produto (garantir que a entrada para quantidade de produtos comprados seja maior que zero)
+1°  Abrir o arquivo produtos.csv e armazena-lo em uma lista - OK
+2°  Exibir mensagem "Iniciar atendimento" e "Finalizar atendimento" - OK
+3°  Inserir o id do produto, que deve constar na lista (fazer validação da entrada do id) - OK
+4°  Inserir a quantidade do produto (garantir que a entrada para quantidade de produtos comprados seja maior que zero) - OK
 5°  Adicionar o produto na lista do cliente (cada cliente tem sua propria lista)
 6°  Ao comprar um produto, deve dar baixa no estoque diminuindo a quantidade
 7°  Ao finalizar o atendimento de um cliente, exibir 'nota fiscal' com as informações

@@ -18,22 +18,32 @@ def msg_finalizar_atendimento ():
         else:
             print("Entrada inválida")
 
-def entrar_quantidade ():
+def entrar_quantidade (produto):
     while True:
         try:
             qtd = int(input("Digite a quantidade do produto: "))
             if (qtd > 0):
-                return qtd
+                if verificar_estoque(produto, qtd):
+                    return qtd
+                else:
+                    print("Estoque insuficiente")
             else:
                 print("A quantidade tem que ser maior que zero")
         except:
             print("Entrada inválida")
 
 def entrar_id (produtos):
-    while True:
-        id = int(input("Digite o id do produto: "))
-        if pesquisar_id(produtos, id):
-            return id
+    try:
+        while True:
+            id = int(input("Digite o id do produto: "))
+            if pesquisar_id(produtos, id):
+                produto = produto_pelo_id(produtos, id)
+                if produto[2] > 0:
+                    return id
+                else:
+                    print("Produto sem estoque")
+    except:
+        print("Entrada inválida")
     
 def pesquisar_id (produtos, id):
     '''
@@ -59,7 +69,12 @@ def remover_produto_estoque (produtos, id, quantidade):
         if produto[0] == id:
             produto[2] -= quantidade
     return produtos
-    
+
+def produto_pelo_id (produtos, id):
+    for produto in produtos:
+        if produto[0] == id:
+            return produto
+
 def imprimir_produtos (produtos):
     for produto in produtos:
         print(f"{produto}")
